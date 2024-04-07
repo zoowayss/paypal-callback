@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import top.zoowayss.paypalcallback.utils.JsonUtil;
 
 import java.io.BufferedReader;
 
@@ -22,7 +23,8 @@ public class CallbackController {
             e.printStackTrace();
             return "Error processing request";
         }
-        log.info("call back : \n{}",stringBuilder);
-        return stringBuilder.toString();
+        String res = JsonUtil.toPrettyFormat(stringBuilder.toString());
+        log.info("call back : \n{}", res);
+        return res;
     }
 }
